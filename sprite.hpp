@@ -85,4 +85,21 @@ public:
   }
 };
 
+class Level {
+  WINDOW *lvl_win;
+public:
+  Level(int height, int width, int starty, int startx) {
+    lvl_win = newwin(height, width, starty, startx);
+    box(lvl_win, 0, 0);
+    wrefresh(lvl_win);
+  }
+
+  // ~Level() {
+  //   wborder(lvl_win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+  //   wrefresh(lvl_win);
+  //   delwin(lvl_win);
+  // }
+
+};
+
 #endif

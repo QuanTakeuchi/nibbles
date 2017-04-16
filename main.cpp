@@ -9,7 +9,8 @@
 int main() {
   initCurses();
   try {
-    std::string ballFile = "Sprites/ball.sprt";
+    std::string ballFile = "Sprites/ball_1x1.sprt";
+    std::string borderFile = "Sprite/border_30x80.sprt";
     Sprite ball(ballFile, 1, 1);
     ball.putAt(1,1);
 
@@ -20,6 +21,10 @@ int main() {
     scrLimit.y = 40;
     Nibbles nib1(init, scrLimit);
     nib1.draw();
+
+
+    Level lvl1(30, 80, 0, 0);
+
     refresh();
     getch();
     exitCurses();
