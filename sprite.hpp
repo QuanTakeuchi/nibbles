@@ -3,6 +3,12 @@
 
 #include <vector>
 #include <fstream>
+#include <assert.h>
+
+struct Coor {
+  int x;
+  int y;
+};
 
 class Sprite {
   int sprtHeight;
@@ -45,5 +51,38 @@ int Sprite::putAt(int xloc, int yloc) {
   return 0;
 }
 
+class Nibbles {
+  int size;
+  std::vector<Coor> body;
+  char head;
+  char tail;
+  Coor scrLimit;
+public:
+  Nibbles(Coor init, Coor limits) {
+    head = 'O';
+    tail = 'o';
+    size = 3;
+    body.resize(size);
+
+    body[0] = init;
+    scrLimit = limits;
+
+    for(int i=1; i<size; i++) {
+      assert(body[i-1].x > 1);
+      body[i].x = body[i-1].x-1;
+      body[i].y = body[i-1].y;
+      assert(body[i].x < scrLimit.x && body[i].y<scrLimit.y &&
+	     body[i].y > 1);
+    }
+  }
+
+  int draw() {
+    mvaddch(body[0].y, body[0].x, head);
+    for(int i=1; i<size; i++) {
+      mvaddch(body[i].y, body[i].x, tail);
+    }
+    return 0;
+  }
+};
 
 #endif
