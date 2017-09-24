@@ -5,6 +5,9 @@
 #include <fstream>
 #include <assert.h>
 
+
+enum DIRECIONS{ UP, DOWN, LEFT, RIGHT};
+
 struct Coor {
   int x;
   int y;
@@ -57,9 +60,11 @@ class Nibbles {
   char head;
   char tail;
   Coor scrLimit;
+  int movDirection;
+  Coor food;
 public:
   Nibbles(Coor init, Coor limits) {
-    head = 'O';
+    head = 'o';
     tail = 'o';
     size = 3;
     body.resize(size);
@@ -83,6 +88,35 @@ public:
     }
     return 0;
   }
+
+  int clearLast() {
+    mvaddch(body[size-1].y, body[size-1].x, ' ');
+    return 0;
+  }
+
+  int move(int movDirection) {
+    for(int i=size-1; i>0; i--) {
+      body[i].x = body[i-1].x;
+      body[i].y = body[i-1].y;
+    }
+    switch(movDirection) {
+    case DOWN: 
+      body[0].y = body[0].y+1;
+      break;
+    case UP:
+      body[0].y = body[0].y-1;
+      break;
+    case RIGHT:
+      body[0].x = body[0].x+1;
+      break;
+    case LEFT:
+      body[0].x = body[0].x-1;
+      break;
+    default:
+      return 101;
+    }
+    return 0;
+  }
 };
 
 class Level {
@@ -101,5 +135,7 @@ public:
   // }
 
 };
+
+
 
 #endif

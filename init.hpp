@@ -3,6 +3,7 @@
 
 void initCurses() {
   initscr();
+  noecho();
   curs_set(0);
 }
 
