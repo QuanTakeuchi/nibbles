@@ -1,2 +1,2 @@
 # nibbles
-Snake eating dots in ncurses
+My Snake eating dots Bot.
